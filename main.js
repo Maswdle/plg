@@ -32,11 +32,24 @@ function $x(STR_XPATH) {
 addToolBtn("btn_check", "开始", change, para);
 addToolBtn("btn_remv", "移除限制", remove_l, para);
 addToolBtn("btn_diyage", "改年龄为字符串", change_age_str, para);
-addToolBtn("btn_remake", "重开", () => { user_id = null; }, para);
+addToolBtn("btn_remake", "重开", () => {
+    delCookie("user+id");
+}, para);
 // addToolBtn("btn_sex", "only girl: false", change_g, para);
 // addToolBtn("btn_auto_report", "auto_report: false", change_r, para);
 
+
 // !button end
+
+function delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null)
+        document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + ";path=/";
+}
+
+
 function work() {
     obsSleep(0)
         .then(() => obsSleep(4))
