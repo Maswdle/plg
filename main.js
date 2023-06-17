@@ -137,12 +137,12 @@ function refresh() {
         for (const [key, value] of Object.entries(dic_userlist)) {
             //document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText
             if (value.indexOf(child.getElementsByClassName("nickname").item(0).innerText) !== -1 && value.indexOf("女") !== -1) {
-                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).style.color = "8b0000";
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).setAttribute('style', 'background-color: #8b0000;')
                 document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText += "(女)"
                 break;
             }
             else if (value.indexOf(childgetElementsByClassName("nickname").item(0).innerText) !== -1) {
-                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).style.color = "#009000";
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).setAttribute('style', 'background-color: ##009000;')
                 document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText += "(男)"
                 break;
             }
