@@ -80,8 +80,8 @@ function change() {
 }
 
 function change_g() {
-    girl = !girl;
-    document.getElementsByClassName(" monkeyToolBtn btn_sex").item(0).textContent = girl ? "only girl: true" : "only girl: false";
+    obsFunc(() => { girl = !girl; document.getElementsByClassName(" monkeyToolBtn btn_sex").item(0).textContent = girl ? "only girl: true" : "only girl: false"; })
+
 }
 
 function change_r() {
@@ -104,11 +104,13 @@ function save_info() {
             var keys = Object.keys(dic_userlist)
             var v = Object.values(dic_userlist)
             console.log("in!")
+            console.log(girl);
             // try {
             var key_name = document.querySelector("#randomSelInfo > div:nth-child(2) > span").innerHTML;
             var value_sex = document.querySelector("#randomSelInfo > div:nth-child(3) > span").innerHTML;
             if (value_sex == "女") {
                 dic_userlist[keys[keys.length - 1]] = v[v.length - 1] + " (" + value_sex + ")"
+
                 if (girl)
                     obsFunc(change);
             }
