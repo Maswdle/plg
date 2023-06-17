@@ -33,10 +33,10 @@ function $x(STR_XPATH) {
 addToolBtn("btn_check", "开始", change, para);
 addToolBtn("btn_remv", "移除限制", remove_l, para);
 addToolBtn("btn_diyage", "改年龄为字符串", change_age_str, para);
-addToolBtn("btn_remake", "重开", () => {
-    delCookie("user+id");
-}, para);
-// addToolBtn("btn_sex", "only girl: false", change_g, para);
+// addToolBtn("btn_remake", "重开", () => {
+//     delCookie("user+id");
+// }, para);
+addToolBtn("btn_sex", "only girl: false", change_g, para);
 // addToolBtn("btn_auto_report", "auto_report: false", change_r, para);
 
 
@@ -81,7 +81,6 @@ function change() {
 
 function change_g() {
     girl = !girl;
-    if (girl) _stop = 0;
     document.getElementsByClassName(" monkeyToolBtn btn_sex").item(0).textContent = girl ? "only girl: true" : "only girl: false";
 }
 
@@ -110,6 +109,8 @@ function save_info() {
             var value_sex = document.querySelector("#randomSelInfo > div:nth-child(3) > span").innerHTML;
             if (value_sex == "女") {
                 dic_userlist[keys[keys.length - 1]] = v[v.length - 1] + " (" + value_sex + ")"
+                if (girl)
+                    obsFunc(change);
             }
             info_map.set(key_name, value_sex);
         })
@@ -136,15 +137,16 @@ function refresh() {
         var t = document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText
         for (const [key, value] of Object.entries(dic_userlist)) {
             //document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText
-            if (value.indexOf(child.getElementsByClassName("nickname").item(0).innerText) !== -1 && value.indexOf("女") !== -1) {
-                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).setAttribute('style', 'background-color: #8b0000;')
-                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText = "     " + t + "(女)"
+            if (value.indexOf(child.getElementsByClassName("nickname").item(0).innerText) !== -1 && value.indexOf("(女)") !== -1) {
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).style.color = "red"
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText = "            " + t + "(女)"
 
                 break;
             }
             else if (value.indexOf(child.getElementsByClassName("nickname").item(0).innerText) !== -1) {
-                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).setAttribute('style', 'background-color: ##009000;')
-                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText = "     " + t + "(男)"
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).style.color = "green"
+                // document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).setAttribute('style', 'background-color: ##009000;')
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText = "            " + t + "(男)"
                 break;
             }
         }
