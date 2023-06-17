@@ -14,7 +14,8 @@ var para = {
 //! listen
 
 document.getElementById("ButtonRandom").addEventListener("click", () => { save_info() });
-document.getElementById("user_Random").addEventListener("click", () => { refresh() });
+document.getElementById("user_Random").addEventListener("click", () => { obsSleep(0.6).then(() => { refresh() }) });
+document.getElementById("oldUserList").addEventListener("click", () => { obsSleep(0.6).then(() => { refresh() }) });
 //! 
 
 function $x(STR_XPATH) {
@@ -56,6 +57,7 @@ function work() {
         //监测存在元素然后点击
         .then(() => obsClick('#ButtonRandom'))
         .then(() => obsSleep(1.5))
+        .then(() => save_info())
 
 }
 
@@ -95,20 +97,20 @@ function report() {
         // .then(() => obsClick("#layui-layer100003 > div.layui-layer-btn.layui-layer-btn- > a.layui-layer-btn0"), -0.1)
         .then(() => obsSleep(0.3))
 }
-
+// var dic_userlist = {} //del
 function save_info() {
     //
     obsSleep(1)
         .then(() => {
+            var keys = Object.keys(dic_userlist)
+            var v = Object.values(dic_userlist)
             console.log("in!")
             // try {
             var key_name = document.querySelector("#randomSelInfo > div:nth-child(2) > span").innerHTML;
             var value_sex = document.querySelector("#randomSelInfo > div:nth-child(3) > span").innerHTML;
-            // if (value_sex == "女")
-            //     $x("/html/body/div[1]/div[1]/div[1]/div[3]/a[1]/span[3]")[0].style.color = "#ff0000";
-            // else
-            // $x("/html/body/div[1]/div[1]/div[1]/div[3]/a[1]/span[3]")[0].style.color = '#009000'
-            console.log("already saved !")
+            if (value_sex == "女") {
+                dic_userlist[keys[keys.length - 1]] = v[v.length - 1] + " (" + value_sex + ")"
+            }
             info_map.set(key_name, value_sex);
         })
 
@@ -120,6 +122,7 @@ function remove_l() {
 
     randomVipCode = '1';
 }
+
 /**
  * 刷新列表
  */
@@ -128,20 +131,33 @@ function refresh() {
     var mydiv = document.querySelector("#user_list");
     for (let i = 0; i < mydiv.children.length; i++) {
         var child = mydiv.children[i];
-        console.log(child.querySelector("#nickname").innerHTML);
-        if (info_map.has(child.nickname.innerHTML)) {
-            if (info_map.get(child.nickname.innerHTML) == '女') {
-                document.querySelector("#user_list").children[i].nickname.style.color = "#ff0000";
+        // console.log(child.querySelector("#nickname").innerHTML);
+
+
+        for (const [key, value] of Object.entries(dic_userlist)) {
+            //document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText
+            if (value.indexOf(child.getElementsByClassName("nickname").item(0).innerText) !== -1 && value.indexOf("女") !== -1) {
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).style.color = "8b0000";
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText += "(女)"
+                break;
             }
-            else {
-                document.querySelector("#user_list").children[i].nickname.style.color = "#009000";
+            else if (value.indexOf(childgetElementsByClassName("nickname").item(0).innerText) !== -1) {
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).style.color = "#009000";
+                document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText += "(男)"
+                break;
             }
         }
+        // if (info_map.get(child.nickname.innerHTML) == '女') {
+
+        //     document.querySelector("#user_list").children[i].nickname.style.color = "#009000";
+
+        // }
     }
+
 }
 
 function change_age_str() {
-    var str = prompt("输入内容(任意字符)", "比如这行字,别人看得到哦");
+    var str = prompt("输入内容(任意字符)", "");
     if (str != null) {
         userAge = str;
     }
