@@ -141,7 +141,7 @@ function refresh() {
                 document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText += "(女)"
                 break;
             }
-            else if (value.indexOf(childgetElementsByClassName("nickname").item(0).innerText) !== -1) {
+            else if (value.indexOf(child.getElementsByClassName("nickname").item(0).innerText) !== -1) {
                 document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).setAttribute('style', 'background-color: ##009000;')
                 document.querySelector("#user_list").children[i].getElementsByClassName("nickname").item(0).innerText += "(男)"
                 break;
