@@ -1,5 +1,16 @@
+// ==UserScript==
+// @name         nmchat_ext
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  nmchat extensions
+// @author       Maswdle@github.com
+// @match        http://*/random*
+// @icon         http://file2.nmcp.cn/img/sys/logo.png
+// @grant        none
+// @require https://unpkg.com/layui@2.8.8/dist/layui.js
+// ==/UserScript==
 
-var info_map = new Map();
+
 var hold = false;
 var girl = false;
 var auto = false;
@@ -18,15 +29,6 @@ document.getElementById("user_Random").addEventListener("click", () => { obsSlee
 document.getElementById("oldUserList").addEventListener("click", () => { obsSleep(0.6).then(() => { refresh() }) });
 //! 
 
-function $x(STR_XPATH) {
-    var xresult = document.evaluate(STR_XPATH, document, null, XPathResult.ANY_TYPE, null);
-    var xnodes = [];
-    var xres;
-    while (xres = xresult.iterateNext()) {
-        xnodes.push(xres);
-    }
-    return xnodes;
-}
 
 // !button
 // addToolBtn("btn_script", "click", test, para);
