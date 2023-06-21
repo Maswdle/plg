@@ -28,8 +28,7 @@ var para = {
 document.getElementById("ButtonRandom").addEventListener("click", () => { save_info() });
 document.getElementById("user_Random").addEventListener("click", () => { obsSleep(0.6).then(() => { refresh() }) });
 document.getElementById("oldUserList").addEventListener("click", () => { obsSleep(0.6).then(() => { refresh() }) });
-//! 
-
+// ! 
 
 // !button
 // addToolBtn("btn_script", "click", test, para);
@@ -41,7 +40,7 @@ addToolBtn("btn_diyage", "改年龄为字符串", change_age_str, para);
 // }, para);
 addToolBtn("btn_sex", "only girl: false", change_g, para);
 // addToolBtn("btn_auto_report", "auto_report: false", change_r, para);
-
+addDivEle("layui-btn-container", '<button type="button" class="layui-btn">按钮一</button>', () => { alert("Hello!") })
 
 // !button end
 
