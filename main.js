@@ -8,6 +8,7 @@
 // @icon         http://file2.nmcp.cn/img/sys/logo.png
 // @grant        none
 // @require https://unpkg.com/layui@2.8.8/dist/layui.js
+// @require https://greasyfork.org/scripts/469146-obs/code/OBS.js?version=1208613
 // ==/UserScript==
 
 
